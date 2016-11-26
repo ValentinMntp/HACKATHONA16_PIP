@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="App">
 
 <head>
 
@@ -11,6 +11,9 @@
     <!-- Core CSS - Include with every page -->
    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
+    <script src="/javascripts/app.js"></script>
+
 
     <!-- Page-Level Plugin CSS - Dashboard -->
     <link href="/stylesheets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
@@ -18,14 +21,13 @@
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="/stylesheets/sb-admin.css" rel="stylesheet">
-
     <link rel='stylesheet' href='/stylesheets/fullcalendar.css' />
 
 </head>
 
 <body>
 
-    <div id="wrapper">
+    <div id="wrapper" ng-controller="AppController" >
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Plan Interactif Personnalisé</a>
@@ -38,21 +40,21 @@
         </div>
         <!-- /.navbar-header -->
 
-  <ul class="nav navbar-top-links navbar-right">
-    Connecté(e) en tant que Superman </strong>
-      <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-user fa-fw" aria-hidden="true"></i>  <i class="fa fa-caret-down" aria-hidden="true"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-user">
-              <li><a href="#"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Se deconnecter</a>
-              </li>
-          </ul>
-          <!-- /.dropdown-user -->
-      </li>
-      <!-- /.dropdown -->
-  </ul>
-  <!-- /.navbar-top-links -->
+        <ul class="nav navbar-top-links navbar-right">
+          Connecté(e) en tant que {{name}} </strong>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw" aria-hidden="true"></i>  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Se deconnecter</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
 
   <div class="navbar-default navbar-static-side" role="navigation">
       <div class="sidebar-collapse">
@@ -62,6 +64,7 @@
               </li>
               <li>
                   <a href="/"><i class="fa fa-th-list fa-fw" aria-hidden="true"></i> Mon emploi du temps</a>
+                  <button ng-click="refresh()">Refresh</button>
               </li>
           </ul>
           <!-- /#side-menu -->
@@ -88,7 +91,12 @@
                         </div>
                         <!-- /.panel-heading -->
                           <div class="panel-body">
-                              <div id='calendar'></div>
+                              <!-- <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="events" calendar="calendar1"></div> -->
+                              <ul>
+                                <li ng-repeat="event in events">
+                                  {{event.title}} : {{event.start}} à {{event.end}}
+                                </li>
+                              </ul>
                           </div>
                         <!-- /.panel-body -->
                     </div>
@@ -107,7 +115,8 @@
     <script src="/javascripts/jquery-1.10.2.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src='/javascripts/moment.min.js'></script>
-    <script src='/javascripts/fullcalendar.js'></script>
+    <!-- <script src='/javascripts/calendar.js'></script>
+    <script src='/javascripts/fullcalendar.js'></script>  -->
     <script src='/javascripts/fr.js'></script>
 
     <!-- Page-Level Plugin Scripts - Dashboard -->
@@ -117,27 +126,6 @@
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="/javascripts/sb-admin.js"></script>
-    <script>
-    $(document).ready(function() {
-  		$('#calendar').fullCalendar({
-  			header: {
-  				left: 'prev,next today',
-  				center: 'title',
-  				right: 'month,agendaWeek,agendaDay,listWeek'
-  			},
-        locale: 'fr',
-        allDaySlot : false,
-        minTime: "08:00:00",
-        maxTime: "20:00:00",
-  			defaultDate: new Date(),
-  			navLinks: true, // can click day/week names to navigate views
-  			editable: true,
-  			eventLimit: true, // allow "more" link when too many events
-
-  		});
-
-  	});
-  </script>
 </body>
 
 </html>
