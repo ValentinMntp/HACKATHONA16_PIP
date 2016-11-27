@@ -21,6 +21,7 @@ app.get('/user/:id', function(req,res,err){
 
 
 app.post('/updateUser/:id', function(req, res, errr){
+	console.log("on essaye de faire une update");
 	var id = req.params.id;
 	var json = req.body;
 	mongoRequest.updateUser(id,json);
