@@ -14,7 +14,17 @@
   </body>
 
   <script>
-    // You can also require other files to run in this process
-   // require('./renderer.js')
+    var SerialPort = require("serialport");
+    var port = new SerialPort("/dev/tty-usbserial1", {
+      baudRate: 5600,
+      parser: SerialPort.parsers.readline('\n')
+    });
+    port.on("open", function(err) {
+      console.log("open");
+      if(err) console.error(err);
+    });
+    port.on("data", function(data) {
+      console.log(data);
+    })
   </script>
 </html>
