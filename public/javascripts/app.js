@@ -5,6 +5,7 @@ angular.module('App', ['ui.calendar'])
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
+        var data;
 
         $scope.name = "Inconnu";
 
@@ -24,8 +25,9 @@ angular.module('App', ['ui.calendar'])
              maxTime :"21:00:00",
              allDaySlot : false,
              locale : 'fr',
-             hiddenDays : [0],
+             //hiddenDays : [0],
              eventClick: function(event, jsEvent, view){
+               $scope.eventClicked = event;
                $('#myModal').modal('toggle');
               },
            }
@@ -34,22 +36,25 @@ angular.module('App', ['ui.calendar'])
          $scope.events = [];
          $scope.eventSources = [$scope.events];
 
-         $scope.update = function(id, salle){
-           var event = uiCalendarConfig.calendars.calendar.fullCalendar('clientEvents', id);
+         $scope.update = function(salle){
+           $scope.eventClicked._event.salle= salle;
+           $.ajax({
+              type: "POST",
+              url: "http://172.25.31.238:8080/updateUser/C25V05D5",
+              data: JSON.stringify(data),
+              dataType: 'json',
+              contentType : 'application/json'
+            });
 
-           event[0].title = event[0].title.substr(0, 4) + '\n' + salle ;
-
-           uiCalendarConfig.calendars.calendar.fullCalendar('updateEvent', event[0]);
            $('#myModal').modal('hide');
-           uiCalendarConfig.calendars.calendar.fullCalendar('refresh');
+           $scope.refresh();
          }
 
         $scope.refresh = function(){
-          var data = $.ajax("http://localhost:3000/7", { async:false }).responseJSON;
+          data = $.ajax("http://172.25.31.238:8080/user/C25V05D5", { async:false }).responseJSON;
+          console.log(data);
           $scope.name = data.name;
-          var i = 0;
-          var events = data.EDT.map(function(event){
-            i++;
+          var events = data.EDT.map(function(event, i){
             if (event.nom == 'LO23')
               var col = '#cc0303'
             else if (event.nom =='MT09')
@@ -59,9 +64,10 @@ angular.module('App', ['ui.calendar'])
             return {
               id: i,
               title : event.nom + ' \n '+ event.salle,
-              start : event.debut,
-              end : event.fin,
-              color: col
+              start : new Date (event.debut),
+              end : new Date (event.fin),
+              color: col,
+              _event: event
             };
 
           });
