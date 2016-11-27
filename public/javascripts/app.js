@@ -1,17 +1,48 @@
-angular.module('App', [])
-      .controller('AppController', function($scope) {
+angular.module('App', ['ui.calendar'])
+      .controller('AppController', function($scope, uiCalendarConfig) {
+
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
         $scope.name = "Inconnu";
-        $scope.events = [];
+
+        $scope.uiConfig = {
+           calendar:{
+             height: 450,
+             editable: true,
+             defaultView: 'agendaDay',
+             header:{
+               left: 'month agendaWeek agendaDay',
+               center: 'title',
+               right: 'today prev,next'
+             },
+             minTime :"08:00:00",
+             maxTime :"21:00:00",
+             allDaySlot : false,
+             locale : 'fr',
+
+            // hiddenDays : [0],
+           }
+         };
+
+         $scope.events = [];
+         $scope.eventSources = [$scope.events];
 
         $scope.refresh = function(){
           var data = $.ajax("http://localhost:3000/7", { async:false }).responseJSON;
           $scope.name = data.name;
-          $scope.events = data.events.map(function(event){
+          console.log(data.EDT);
+          var events = data.EDT.map(function(event){
             return {
-              title : event.title,
-              start : moment(event.start).locale('fr').format('LLLL'),
-              end : moment(event.end).locale('fr').format('LT')
+              title : event.nom + ' \n '+ event.salle,
+              start : event.debut,
+              end : event.end,
             }
           });
+
+          uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
+          uiCalendarConfig.calendars.calendar.fullCalendar('addEventSource', events);
         }
       });
