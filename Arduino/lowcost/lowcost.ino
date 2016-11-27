@@ -48,7 +48,7 @@ void loop() {
             s[2] = rfid.buffer[2] + '0';
             s[3] = rfid.buffer[3] + '0';
             matrix.write(getMatrice(s));
-            rfid.state = RFID::ERROR;
+            rfid.reset();
             t = millis();
         break;
         default:
