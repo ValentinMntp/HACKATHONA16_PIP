@@ -14,9 +14,11 @@ app.get('/user/:id', function(req,res,err){
 	var obj = mongoRequest.getUser(id, data => {console.log(data); res.json(data)});
 });
 
-app.put('/user/:id', function(req, res, err){
+
+app.post('/updateUser/:id', function(req, res, errr){
 	var id = req.params.id;
-	console.log('on a une requete node');
+	var json = req.body;
+	mongoRequest.updateUser(id,json);
 });
 
 app.post('/user/', function(req, res, err){
