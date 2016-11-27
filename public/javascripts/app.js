@@ -11,7 +11,7 @@ angular.module('App', ['ui.calendar'])
         $scope.uiConfig = {
            calendar:{
              height: 500,
-             editable: true,
+             eventStartEditable: true,
              defaultView: 'agendaDay',
              header:{
                left: 'month agendaWeek agendaDay',
@@ -26,6 +26,9 @@ angular.module('App', ['ui.calendar'])
              allDaySlot : false,
              locale : 'fr',
              hiddenDays : [0],
+             eventClick: function(event, jsEvent, view) {
+                alert("Là on est sencé pouvoir modifier la salle en fait");
+              },
            }
          };
 
@@ -36,12 +39,19 @@ angular.module('App', ['ui.calendar'])
         $scope.refresh = function(){
           var data = $.ajax("http://localhost:3000/7", { async:false }).responseJSON;
           $scope.name = data.name;
-          console.log(data.EDT);
+
           var events = data.EDT.map(function(event){
+            if (event.nom == 'LO23')
+              var col = '#cc0303'
+            else if (event.nom =='MT09')
+              var col = '#64b557'
+            else if (event.nom =='GE37')
+              var col = '#447889'
             return {
               title : event.nom + ' \n '+ event.salle,
               start : event.debut,
               end : event.end,
+              color: col
             }
           });
 
