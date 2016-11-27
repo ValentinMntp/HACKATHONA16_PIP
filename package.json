@@ -1,7 +1,7 @@
 {
   "name": "hackathona16-pip",
   "version": "0.0.0",
-  "main": "main.js",	 
+  "main": "main.js",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -17,5 +17,17 @@
     "nodemon": "^1.11.0",
     "serve-favicon": "~2.3.0",
     "electron": "^1.4.1"
-  }
+  },
+  "description": "",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValentinMntp/HACKATHONA16_PIP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ValentinMntp/HACKATHONA16_PIP/issues"
+  },
+  "homepage": "https://github.com/ValentinMntp/HACKATHONA16_PIP#readme"
 }
