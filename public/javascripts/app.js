@@ -20,14 +20,13 @@ angular.module('App', ['ui.calendar'])
              },
              slotDuration: '00:15:00',
              slotLabelFormat:'H:mm',
-             displayEventTime:false,
              minTime :"08:00:00",
              maxTime :"21:00:00",
              allDaySlot : false,
              locale : 'fr',
              hiddenDays : [0],
-             eventClick: function(event, jsEvent, view) {
-                alert("Là on est sencé pouvoir modifier la salle en fait");
+             eventClick: function(event, jsEvent, view){
+               $('#myModal').modal('toggle');
               },
            }
          };
@@ -35,12 +34,22 @@ angular.module('App', ['ui.calendar'])
          $scope.events = [];
          $scope.eventSources = [$scope.events];
 
+         $scope.update = function(id, salle){
+           var event = uiCalendarConfig.calendars.calendar.fullCalendar('clientEvents', id);
+
+           event[0].title = event[0].title.substr(0, 4) + '\n' + salle ;
+
+           uiCalendarConfig.calendars.calendar.fullCalendar('updateEvent', event[0]);
+           $('#myModal').modal('hide');
+           uiCalendarConfig.calendars.calendar.fullCalendar('refresh');
+         }
 
         $scope.refresh = function(){
           var data = $.ajax("http://localhost:3000/7", { async:false }).responseJSON;
           $scope.name = data.name;
-
+          var i = 0;
           var events = data.EDT.map(function(event){
+            i++;
             if (event.nom == 'LO23')
               var col = '#cc0303'
             else if (event.nom =='MT09')
@@ -48,12 +57,15 @@ angular.module('App', ['ui.calendar'])
             else if (event.nom =='GE37')
               var col = '#447889'
             return {
+              id: i,
               title : event.nom + ' \n '+ event.salle,
               start : event.debut,
-              end : event.end,
+              end : event.fin,
               color: col
-            }
+            };
+
           });
+
 
           uiCalendarConfig.calendars.calendar.fullCalendar('removeEvents');
           uiCalendarConfig.calendars.calendar.fullCalendar('addEventSource', events);
