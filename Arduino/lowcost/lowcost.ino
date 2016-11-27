@@ -1,7 +1,7 @@
 #include <SimpleTimer.h>
 #include <time.h>
 #include "RFID.h"
-#include "SevenSegs.h"
+//#include "SevenSegs.h"
 #include "Matrix.h"
 #include "getMatrice.h"
 
@@ -9,7 +9,7 @@ RFID rfid;
 //SevenSegs seven_segs;
 Matrix matrix;
 
-SimpleTimer timer, timer2; 
+SimpleTimer timer; 
 
 byte sander[] = {
    0b00111100,
@@ -25,17 +25,13 @@ byte sander[] = {
 void matrixLoop() {
   matrix.loop();
 }
-void rfidLoop() {
-  rfid.loop();
-}
 
 void setup() {
     //Serial.begin(9600); // Initialize serial communications with the PC
     //while (!Serial);    // Do nothing if no serial port is opened (added for Arduinos based on ATMEGA32U4)
     rfid.init(1, 4);
     matrix.init();
-    timer.setInterval(500, matrixLoop);
-    timer.setInterval(100, rfidLoop);
+    timer.setInterval(200, matrixLoop);
     matrix.write(sander);
 }
 
@@ -43,7 +39,7 @@ unsigned long t = 0;
 
 void loop() {
     // RFID
-    //rfid.loop();
+    rfid.loop();
     switch(rfid.state) {
         case RFID::WAITING:
             char s[4];
@@ -71,7 +67,6 @@ void loop() {
 
     // timer
     timer.run();
-    timer2.run();
 }
 
 
