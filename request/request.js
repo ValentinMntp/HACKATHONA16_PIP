@@ -45,8 +45,8 @@ mongoRequest.addUser = function(obj){
 
 mongoRequest.updateUser = function(obj, id){
 	try{
-		var objToFind = { _id:id};
-		_db.collection("users").update({objToFind,{'EDT':obj.EDT}}, function(error, result) {
+		var objToFind = { _id:id, };
+		_db.collection("users").update(objToFind,{'EDT':obj.EDT}, function(error, result) {
 			if (error) {throw error;}
 		});
 	}
