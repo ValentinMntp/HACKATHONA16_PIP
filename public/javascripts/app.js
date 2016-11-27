@@ -10,7 +10,7 @@ angular.module('App', ['ui.calendar'])
 
         $scope.uiConfig = {
            calendar:{
-             height: 450,
+             height: 500,
              editable: true,
              defaultView: 'agendaDay',
              header:{
@@ -18,17 +18,20 @@ angular.module('App', ['ui.calendar'])
                center: 'title',
                right: 'today prev,next'
              },
+             slotDuration: '00:15:00',
+             slotLabelFormat:'H:mm',
+             displayEventTime:false,
              minTime :"08:00:00",
              maxTime :"21:00:00",
              allDaySlot : false,
              locale : 'fr',
-
-            // hiddenDays : [0],
+             hiddenDays : [0],
            }
          };
 
          $scope.events = [];
          $scope.eventSources = [$scope.events];
+
 
         $scope.refresh = function(){
           var data = $.ajax("http://localhost:3000/7", { async:false }).responseJSON;

@@ -17,12 +17,7 @@ router.get('/:id', function(req, res, next) {
             "fin": new Date(' 2016-11-28T10:00:00'),
             "nom": "LO23",
             "salle": "FB102"
-        }, {
-            "debut": new Date('2016-11-28T10:15:00'),
-            "fin": new Date(' 2016-11-28T12:15:00'),
-            "nom": "MT09",
-            "salle": "FA210"
-        }, {
+        },  {
             "debut": new Date('2016-11-28T14:15:00'),
             "fin": new Date('2016-11-28T16:15:00'),
             "nom": "GE37",
@@ -33,20 +28,10 @@ router.get('/:id', function(req, res, next) {
             "nom": "LO23",
             "salle": "FA500"
         }, {
-            "debut": new Date('2016-11-29T08:00:00'),
-            "fin": new Date('2016-11-28T10:00:00'),
-            "nom": "LO23",
-            "salle": "FB102"
-        }, {
             "debut": new Date('2016-11-29T10:15:00'),
             "fin": new Date('2016-11-28T12:15:00'),
             "nom": "MT09",
             "salle": "FA210"
-        }, {
-            "debut": new Date('2016-11-29T14:15:00'),
-            "fin": new Date('2016-11-28T16:15:00'),
-            "nom": "GE37",
-            "salle": "RO205"
         }, {
             "debut": new Date('2016-11-29T16:30:00'),
             "fin": new Date('2016-11-28T18:30:00'),
@@ -58,17 +43,7 @@ router.get('/:id', function(req, res, next) {
             "fin": new Date('2016-11-30T10:00:00'),
             "nom": "LO23",
             "salle": "FB102"
-        }, {
-            "debut": new Date('2016-11-30T10:15:00'),
-            "fin": new Date('2016-11-30T12:15:00'),
-            "nom": "MT09",
-            "salle": "FA210"
-        }, {
-            "debut": new Date('2016-11-30T14:15:00'),
-            "fin": new Date('2016-11-30T16:15:00'),
-            "nom": "GE37",
-            "salle": "RO205"
-        }, {
+        },  {
             "debut": new Date('2016-11-30T16:30:00'),
             "fin": new Date('2016-11-30T18:30:00'),
             "nom": "LO23",
@@ -80,20 +55,10 @@ router.get('/:id', function(req, res, next) {
             "nom": "LO23",
             "salle": "FB102"
         }, {
-            "debut": new Date('2016-12-01T10:15:00'),
-            "fin": new Date('2016-12-01T12:15:00'),
-            "nom": "MT09",
-            "salle": "FA210"
-        }, {
             "debut": new Date('2016-12-01T14:15:00'),
             "fin": new Date('2016-12-01T16:15:00'),
             "nom": "GE37",
             "salle": "RO205"
-        }, {
-            "debut": new Date('2016-12-01T16:30:00'),
-            "fin": new Date('2016-12-01T18:30:00'),
-            "nom": "LO23",
-            "salle": "FA500"
         },
         {
             "debut": new Date('2016-12-02T08:00:00'),
@@ -105,11 +70,6 @@ router.get('/:id', function(req, res, next) {
             "fin": new Date('2016-12-02T12:15:00'),
             "nom": "MT09",
             "salle": "FA210"
-        }, {
-            "debut": new Date('2016-12-02T14:15:00'),
-            "fin": new Date('2016-12-02T16:15:00'),
-            "nom": "GE37",
-            "salle": "RO205"
         }, {
             "debut": new Date('2016-12-02T16:30:00'),
             "fin": new Date('2016-12-02T18:30:00'),
